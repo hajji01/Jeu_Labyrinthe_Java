@@ -11,9 +11,6 @@ import Grilles.*;
  */
 public class Hero extends Personnage{
 // Attribut GLobal ------------------------------------------//
-	// inventory : est null à sa création.
-	private ArrayList<Items> inventory;
-
 	/** 
 	 * Constructeur ---
 	 * @param name nom de type Sting, ne peut pas être null
@@ -21,8 +18,8 @@ public class Hero extends Personnage{
 	 * Le constructeur hérite de Personnage.
 	 * Inventory, à sa création la liste est vide.
 	 */
-	public Hero(String name, int or) {
-		super(name,or);
+	public Hero(String name, int or,Grille maze) {
+		super(name,or,maze);
 		inventory = new ArrayList<Items>();
 	}
 
@@ -58,25 +55,8 @@ public class Hero extends Personnage{
 	 */
 	public void use(Items o) {
 		if (inventory.contains(o)) {
-
-			// effet de l'item
-
+			o.Effets(this);
 			inventory.remove(o);
-		}
-	}
-
-	/**
-	 * @param o de type Items
-	 * Vend un paramètre o
-	 */
-	public void sell(Items o) {
-
-		if (inventory.contains(o)) {
-			inventory.remove(o);
-			super.or += o.getPrix();
-		} else {
-			System.out.println("error");
-			// donne une exception
 		}
 	}
 

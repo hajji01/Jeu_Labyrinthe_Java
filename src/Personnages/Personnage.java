@@ -1,7 +1,9 @@
 package Personnages;
 
 import Grilles.*;
+import java.util.ArrayList;
 import Grilles.util.Direction;
+import Objets.Items;
 
 /**
  * @author hugo wiernicki , victor truyen
@@ -17,6 +19,8 @@ public abstract class Personnage {
 	// x et y : position du Personnage
 	protected int x;
 	protected int y;
+	protected ArrayList<Items> inventory;
+	protected Cell currentCell;
 
 	/**
 	 * Constructeur Personnage ---
@@ -24,12 +28,29 @@ public abstract class Personnage {
 	 * @param or Or de type integer, en paramètre du constructeur 'Personnage', il ne peut pas être négatif.
 	 * La création d'un Personnage ce fait par son nom et la quantité d'or avec laquelle il va commencer.
 	 */
-	public Personnage(String name, int or ) {
+	public Personnage(String name, int or, Grille maze) {
 		this.name = name;
 		this.or = or;
+		this.x = 0;
+		this.y = 0;
+		this.inventory = new ArrayList<Items>();
+		this.currentCell = maze.getCell(0, 0);
 	}
 
-	
+	/**
+	 * Constructeur Personnage ---
+	 * @param name Nom de type String, en paramètre du constructeur 'Personnage', il ne peut pas être null.
+	 * @param or Or de type integer, en paramètre du constructeur 'Personnage', il ne peut pas être négatif.
+	 * La création d'un Personnage ce fait par son nom et la quantité d'or avec laquelle il va commencer.
+	 */
+	public Personnage(String name, int or, Grille maze, int x, int y) {
+		this.name = name;
+		this.or = or;
+		this.x = x;
+		this.y = y;
+		this.inventory = new ArrayList<Items>();
+		this.currentCell = maze.getCell(x, y);
+	}
 // Méthodes ---------------------------------------------------------------------//
 	/**
 	 * @return this.name, la fonction retourne le nom du Personnage de type String.
@@ -57,6 +78,36 @@ public abstract class Personnage {
 	public void setOr(int or) {
 		this.or = or;
 	}
+
+		/**
+	 * @param x the x to set
+	 */
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	/**
+	 * @param y the y to set
+	 */
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+	/**
+	 * @return the x
+	 */
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * @return the y
+	 */
+	public int getY() {
+		return y;
+	}
+	
 	/**
 	 * @param prmGrille paramètre de type Grille, qui sert à récuperer une fonction getCell()
 	 * @param prmDirection paramètre de type Direction

@@ -1,6 +1,6 @@
 package Personnages;
-import objets.Parchemins;
-
+import Grilles.Grille;
+import Objets.*;
 /**
  * Classe Marchands héritant de la classe abstraite Personnage
  * Un Marchands vend un parchemin qui contient l'objectif à atteindre.
@@ -14,17 +14,19 @@ public class Marchands extends Personnage{
      * @param name nom du marchands, de type String.
      * Héritant du constructeur Personnage.
      */
-    public Marchands(String name){
-        super(name);
+    public Marchands(String name,int or, Grille maze){
+        super(name,or,maze);
     }
 // Méthodes ------------------------------------------//
     /**
      * @param p engager la conversation par un personnage P
      * la méthodes ne renvois rien ou pas .
      */
-    public void Conversation(Personnage p){
-        String a = "je te vend ce parchemins pour : " + this.or ;
-        Parchemins D = new Parchemins();
-
+    public void sell(Items obj, Personnage P){
+        if(this.inventory.contains(obj)){
+            P.inventory.add(obj);
+            this.inventory.remove(obj);
+            this.or += obj.getPrix();
+        }
     }
 }

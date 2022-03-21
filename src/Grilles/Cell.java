@@ -60,9 +60,11 @@ public class Cell {
          return this.ItemIsTrue;
     }
 
-    public void getItems(){
+    public Items getItems(){
         if(ItemIsTrue == true){
-            setObj(this.obj);
+            return this.obj;
+        }else{
+            return null;
         }
     }
     /**

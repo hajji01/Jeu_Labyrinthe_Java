@@ -34,6 +34,7 @@ public abstract class Items {
 		this.prix = prix;
 	}
 
-	// Effet d'un Items
-	public abstract void Effets(Personnage p);
+	public void Effets(Personnage p){
+		
+	}
 }

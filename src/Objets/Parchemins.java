@@ -1,5 +1,7 @@
 package Objets;
 
+import Grilles.util.AleaGen;
+import Grilles.util.Goal;
 import Personnages.Personnage;
 
 /**
@@ -22,16 +24,30 @@ public class Parchemins extends Items{
 	/**
 	 * @param p est Personnage sur lequel l'effet sera appliqué
 	 */
-	public void Effets(Personnage p) {
+	public void Effets(Personnage p,Goal goal) {
 		
 		// Sur la grille dans la creation il faut definir une case au hasard et elle sera la case à atteindre.
 		// recup les coordonnées de cette case 
 		// un switch entre une direction à donner ou la case en elle même (à voir plus tard )
 
-		return generator.genObjectifCell();
+		String clue = "";
+		int diffX ;
+		int diffY ;
 
+		diffX = goal.getPosX() - p.getX();
+		diffY = goal.getPosY() - p.getY();
 
+		if (diffX > 0) {
+			clue = clue + "Votre Objectif est à l'Est de votre position";
+		}else{
+			clue = clue + "Votre Objectif est à l'Ouest de votre position";
+		}
 
-	}
+		if (diffY > 0){
+			clue = clue + "Ainsi que plus au sud";
+		}else{
+			clue = clue + "Ainsi que plus nord";
+		}
 
+}
 }

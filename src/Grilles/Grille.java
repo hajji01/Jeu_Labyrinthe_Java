@@ -23,7 +23,20 @@ public class Grille {
         }
     }
 
+     /**
+     * @return the nx
+     */
+    public int getNx() {
+        return nx;
+    }
 
+    /**
+     * @return the ny
+     */
+    public int getNy() {
+        return ny;
+    }
+    
 
     // ---------------------------------gestion ddes voisins des
     // cellules--------------------------------
