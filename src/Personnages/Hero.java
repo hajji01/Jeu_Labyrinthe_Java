@@ -1,6 +1,9 @@
 package Personnages;
 
 import java.util.ArrayList;
+
+//import javax.swing.text.html.HTMLDocument.BlockElement;
+
 import Objets.*;
 import Grilles.*;
 
@@ -19,7 +22,7 @@ public class Hero extends Personnage{
 	 * Inventory, à sa création la liste est vide.
 	 */
 	public Hero(String name, int or,Grille maze) {
-		super(name,or,maze);
+		super(name,or = 0,maze);
 		inventory = new ArrayList<Items>();
 	}
 
@@ -35,10 +38,13 @@ public class Hero extends Personnage{
 	/**
 	 * La méthode permet de recupérer un objet présent sur une cellule.
 	 */
-	public void pickUpObject(){
+	public boolean pickUpObject(){
+		boolean v = false;
 		if(this.currentCell.isAnItemsThere() == true){			
 			addItems(this.currentCell.getItems());		
+			v = true;
 		}
+		return v;
 	}
 
 	/**

@@ -1,42 +1,41 @@
 package Grilles;
 
-import java.util.Random;
+//import java.util.Random;
 
 import Grilles.util.*;
 
 public class Grille {
-    private AleaGen generator; 
     private int nx;
     private int ny;
     private Cell[][] quadrillage;
-
+    private AleaGen generator;
     // ---------------------------------CONSTRUCTEURS--------------------------------
 
     public Grille(int x, int y) {
         this.nx = x;
         this.ny = y;
-        this.quadrillage = new Cell[x][y];
+        this.quadrillage = new Cell[this.nx][this.ny];
         for (int i = 0; i < this.quadrillage.length; i++) {
             for (int j = 0; j < this.quadrillage[0].length; j++) {
                 this.quadrillage[i][j] = new Cell(i, j);
             }
         }
-    }
-
-     /**
-     * @return the nx
-     */
-    public int getNx() {
-        return nx;
+        this.generator = new AleaGen();
     }
 
     /**
-     * @return the ny
+     * @return the nx abcisse
+     */
+    public int getNx() {
+        return this.nx;
+    }
+
+    /**
+     * @return the ny ordonée
      */
     public int getNy() {
-        return ny;
+        return this.ny;
     }
-    
 
     // ---------------------------------gestion ddes voisins des
     // cellules--------------------------------
@@ -56,6 +55,7 @@ public class Grille {
         }
     }
 
+    // Méthodes pour savoir si il y a un voisin dans une direction ---
     public boolean hasANeighbour(int x, int y, Direction cardinal) {
         return (getNeighbour(x, y, cardinal) != null);
     }
@@ -84,31 +84,40 @@ public class Grille {
         return this.generator.genBoolean();
     }
 
+    // ---
+
     // ---------------------------------InitLabyrinthe--------------------------------
     public void makeMazeStupidMethod() {
-        for (int i = 0; i < this.quadrillage.length; i++) {
-            for (int j = 0; j < this.quadrillage[0].length; j++) {
-                Cell currentCell = this.quadrillage[i][j];
-                Cell neighbour;
-                Direction choiceDirection;
-                if (pileOUface()){
+        String DrawGrille = "";
+        Cell currentCell = null;
+        Cell neighbour = null;
+        Direction choiceDirection = null;
+        for (int i = 0; i < this.quadrillage.length -1; i++) {
+            for (int j = 0; j < this.quadrillage[0].length -1; j++) {
+                DrawGrille += "+-----";
+                System.out.print(DrawGrille);
+                //System.out.print("+-----");
+               // System.out.print("|");
+                currentCell = this.quadrillage[i][j];
+                if (this.pileOUface()) {
                     choiceDirection = Direction.EAST;
-                }else{
+                } else {
                     choiceDirection = Direction.SOUTH;
                 }
+                // on casse la cellule dans la direction tiré et dans la cellule voisine également mais du coté opposé.
                 if (this.hasANeighbour(currentCell.getX(), currentCell.getY(), choiceDirection)) {
-                    if(currentCell.destroyWall(choiceDirection)){
+                    if (currentCell.destroyWall(choiceDirection)) {
                         neighbour = this.getNeighbour(currentCell.getX(), currentCell.getY(), choiceDirection);
                         neighbour.destroyWall(choiceDirection.getOpposite());
+                       // neighbour.destroyWall(choiceDirection.getOtherSolution());
                     }
-                }else{
-                    if (this.hasANeighbour(currentCell.getX(), currentCell.getY(), choiceDirection.getOtherSolution())) {
-                        if(currentCell.destroyWall(choiceDirection.getOtherSolution())){
-                            if(currentCell.destroyWall(choiceDirection.getOtherSolution())){
-                                neighbour = this.getNeighbour(currentCell.getX(), currentCell.getY(), choiceDirection.getOtherSolution());
-                                neighbour.destroyWall(choiceDirection.getOtherSolution().getOpposite());
-                            }                                    
-                        }               
+                } else {
+                    if (this.hasANeighbour(currentCell.getX(), currentCell.getY(),
+                            choiceDirection.getOtherSolution())) {
+                        if (currentCell.destroyWall(choiceDirection.getOtherSolution())) {
+                            neighbour = this.getNeighbour(currentCell.getX(), currentCell.getY(),choiceDirection.getOtherSolution());
+                            neighbour.destroyWall(choiceDirection.getOtherSolution().getOpposite());
+                        }
                     }
                 }
 

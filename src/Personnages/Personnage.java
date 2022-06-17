@@ -2,8 +2,11 @@ package Personnages;
 
 import Grilles.*;
 import java.util.ArrayList;
+
+import Grilles.util.AleaGen;
 import Grilles.util.Direction;
 import Objets.Items;
+//import actions.action;
 
 /**
  * @author hugo wiernicki , victor truyen
@@ -21,7 +24,7 @@ public abstract class Personnage {
 	protected int y;
 	protected ArrayList<Items> inventory;
 	protected Cell currentCell;
-
+	protected AleaGen randomGen;
 	/**
 	 * Constructeur Personnage ---
 	 * @param name Nom de type String, en paramètre du constructeur 'Personnage', il ne peut pas être null.
@@ -35,6 +38,7 @@ public abstract class Personnage {
 		this.y = 0;
 		this.inventory = new ArrayList<Items>();
 		this.currentCell = maze.getCell(0, 0);
+		this.randomGen = new AleaGen();
 	}
 
 	/**
@@ -43,7 +47,7 @@ public abstract class Personnage {
 	 * @param or Or de type integer, en paramètre du constructeur 'Personnage', il ne peut pas être négatif.
 	 * La création d'un Personnage ce fait par son nom et la quantité d'or avec laquelle il va commencer.
 	 */
-	public Personnage(String name, int or, Grille maze, int x, int y) {
+	public void Personnages(String name, int or, Grille maze, int x, int y) {
 		this.name = name;
 		this.or = or;
 		this.x = x;
@@ -119,6 +123,33 @@ public abstract class Personnage {
 			this.y += prmDirection.getY();
 		}
 	}
+
+	/**
+     * la méthode prend une position aléatoire dans la grille 
+     */
+    public void setPersonnage(Grille prmGrille){
+		this.x = 0;
+		this.y =0;
+        //this.x = this.randomGen.genValueBound(prmGrille.getNx()) ;
+        //this.y = this.randomGen.genValueBound(prmGrille.getNy()) ;   
+
+    }
+
+	/**
+     * la méthode prend une position X aléatoire dans la grille 
+     */
+    public void setPersonnageX(Grille prmGrille){
+        this.x = this.randomGen.genValueBound(prmGrille.getNx());  
+
+    }
+
+	/**
+     * la méthode prend une position Y aléatoire dans la grille 
+     */
+    public void setPersonnageY(Grille prmGrille){
+        this.y = this.randomGen.genValueBound(prmGrille.getNy());   
+
+    }
 
 	/**
 	 * @param pnj

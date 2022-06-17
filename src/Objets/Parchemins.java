@@ -1,6 +1,5 @@
 package Objets;
 
-import Grilles.util.AleaGen;
 import Grilles.util.Goal;
 import Personnages.Personnage;
 
@@ -9,9 +8,7 @@ import Personnages.Personnage;
  * Le Parchemin est vendu par un marchand contre de l'or ou peut-être trouvé sur une cellule.
  */
 public class Parchemins extends Items{
-// Attribut Global -----------------------------------------------//
-	//private Cell objectif;
-	private AleaGen generator; 
+
 	/**
 	 * Constructeur ---
 	 * @param name nom du parchemin
@@ -30,7 +27,7 @@ public class Parchemins extends Items{
 		// recup les coordonnées de cette case 
 		// un switch entre une direction à donner ou la case en elle même (à voir plus tard )
 
-		String clue = "";
+		String clue = "";	//INdice
 		int diffX ;
 		int diffY ;
 

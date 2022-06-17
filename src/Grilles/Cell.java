@@ -59,9 +59,12 @@ public class Cell {
          }
          return this.ItemIsTrue;
     }
-
+    /**
+     * recupere un item
+     * @return this.obj de type Items
+     */
     public Items getItems(){
-        if(ItemIsTrue == true){
+        if(this.ItemIsTrue == true){
             return this.obj;
         }else{
             return null;

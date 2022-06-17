@@ -7,8 +7,6 @@ import Objets.*;
  */
 public class Marchands extends Personnage{
 // Attribut GLobal ---------------------------------//
-    // or : ne peut être null
-    private int or = 0;
     /**
      * Constructeur ---
      * @param name nom du marchands, de type String.
@@ -29,4 +27,6 @@ public class Marchands extends Personnage{
             this.or += obj.getPrix();
         }
     }
+
+
 }
